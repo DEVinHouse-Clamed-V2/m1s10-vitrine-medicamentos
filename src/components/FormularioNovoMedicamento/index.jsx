@@ -1,6 +1,9 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { MedicamentosContext } from "../../context/MedicamentosContext"
 
 function FormularioNovoMedicamento(){
+
+  const {AdicionarMedicamento} = useContext(MedicamentosContext)
 
   const [nome, setNome] = useState("")
   const [laboratorio, setLaboratorio] = useState("")
@@ -10,6 +13,7 @@ function FormularioNovoMedicamento(){
     e.preventDefault()
 
     // chamada da função de cadastro
+    AdicionarMedicamento(nome, laboratorio, preco)
   }
 
   return (
@@ -32,7 +36,7 @@ function FormularioNovoMedicamento(){
           type="number"
           placeholder='Preço'
           value={preco} 
-          onChange={(e) => setPreco(e.target.value)}
+          onChange={(e) => setPreco(Number(e.target.value))}
         />
         <button>Cadastrar novo</button>
       </form>
